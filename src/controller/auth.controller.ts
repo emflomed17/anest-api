@@ -1,6 +1,5 @@
 import type { Request, Response } from 'express';
 import httpStatus from 'http-status';
-import { randomUUID } from 'crypto';
 import * as argon2 from 'argon2';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
 import prismaClient from '../config/prisma';
@@ -60,27 +59,6 @@ export const handleSignUp = async (
   if (checkUserEmail) return res.sendStatus(httpStatus.CONFLICT); // email is already in db
 
   try {
-    const hashedPassword = await argon2.hash(password);
-
-    const newUser = await prismaClient.user.create({
-      data: {
-        name: username,
-        email,
-        password: hashedPassword
-      }
-    });
-
-    const token = randomUUID();
-    const expiresAt = new Date(Date.now() + 3600000); // Token expires in 1 hour
-
-    await prismaClient.emailVerificationToken.create({
-      data: {
-        token,
-        expiresAt,
-        userId: newUser.id
-      }
-    });
-
     res.status(httpStatus.CREATED).json({ message: 'New user created' });
   } catch (err) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR);
@@ -103,6 +81,8 @@ export const handleLogin = async (
   req: TypedRequest<UserLoginCredentials>,
   res: Response
 ) => {
+  console.log('HERE');
+
   const cookies = req.cookies;
 
   const { email, password } = req.body;
