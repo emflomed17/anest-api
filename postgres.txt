@@ -1,0 +1,33 @@
+### General Commands:
+- **Connect to PostgreSQL**: `psql`
+- **Exit `psql`**: `\q`
+
+### Database Management:
+- **Create Database**: `createdb dbname`
+- **Connect to Database**: `\c dbname`
+- **List Databases**: `\l`
+
+### Table Management:
+- **Create Table**: `CREATE TABLE tablename (column1 datatype, column2 datatype, ...)`
+- **Show Tables**: `\dt` or `\dt schema_name.*`
+- **Describe Table**: `\d tablename`
+- **Drop Table**: `DROP TABLE tablename`
+
+### Data Manipulation:
+- **Insert Data**: `INSERT INTO tablename (column1, column2, ...) VALUES (value1, value2, ...)`
+- **Select Data**: `SELECT * FROM tablename` or `SELECT column1, column2, ... FROM tablename`
+- **Update Data**: `UPDATE tablename SET column1 = value1, column2 = value2 WHERE condition`
+- **Delete Data**: `DELETE FROM tablename WHERE condition`
+
+### User Management:
+- **Create User**: `CREATE USER username WITH PASSWORD 'password'`
+- **Grant Privileges**: `GRANT ALL PRIVILEGES ON DATABASE dbname TO username`
+- **Revoke Privileges**: `REVOKE ALL PRIVILEGES ON DATABASE dbname FROM username`
+
+### Schema Management:
+- **Create Schema**: `CREATE SCHEMA schemaname`
+- **Set Default Schema**: `SET search_path TO schemaname`
+
+### Miscellaneous:
+- **View Command History**: `\s`
+- **Run SQL Script**: `\i path/to/script.sql`
