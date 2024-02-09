@@ -59,6 +59,16 @@ export const handleSignUp = async (
   if (checkUserEmail) return res.sendStatus(httpStatus.CONFLICT); // email is already in db
 
   try {
+    const hashedPassword = await argon2.hash(password);
+
+    await prismaClient.user.create({
+      data: {
+        name: username,
+        email,
+        password: hashedPassword
+      }
+    });
+
     res.status(httpStatus.CREATED).json({ message: 'New user created' });
   } catch (err) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR);
@@ -100,13 +110,6 @@ export const handleLogin = async (
   });
 
   if (!user) return res.sendStatus(httpStatus.UNAUTHORIZED);
-
-  // check if email is verified
-  if (!user.emailVerified) {
-    res.status(httpStatus.UNAUTHORIZED).json({
-      message: 'Your email is not verified! Please confirm your email!'
-    });
-  }
 
   // check password
   try {
