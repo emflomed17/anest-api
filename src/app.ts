@@ -44,6 +44,10 @@ if (config.node_env === 'production') {
 
 app.use('/api/v1/auth', authRouter);
 
+app.get('/api/v1/status', (_req, res) => {
+  res.json({ status: 'ok', message: 'up and running' });
+});
+
 app.get('/secret', isAuth, (_req, res) => {
   res.json({
     message: 'You can see me'
