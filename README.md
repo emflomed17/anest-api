@@ -27,17 +27,17 @@ ACCESS_TOKEN_EXPIRE=
 REFRESH_TOKEN_EXPIRE=
 
 # name of the refresh token cookie
-REFRESH_TOKEN_COOKIE_NAME=
+ACCESS_TOKEN_COOKIE_NAME=
 
 # Example: postgresql://johndoe:randompassword@localhost:5432/databaseName?schema=schemaName
 DATABASE_URL=
 
 See .env.example for further details
 
-
 ### Prerequisites
 
 node= 19.9.0
+postgresql@15
 
 This project uses Yarn as package manager
 
@@ -66,6 +66,15 @@ Go to the project directory
 <!-- Run Locally -->
 
 ### Run Locally
+
+Make sure postgres server is running.
+
+Create database, schema and user
+
+Make sure role has the right permissions.
+
+Run:
+npx prisma migrate dev —create-only
 
 Start the server in development mode
 

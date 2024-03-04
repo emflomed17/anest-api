@@ -15,7 +15,7 @@ const envSchema = Joi.object().keys({
   ACCESS_TOKEN_EXPIRE: Joi.string().required().default('20m'),
   REFRESH_TOKEN_SECRET: Joi.string().min(8).required(),
   REFRESH_TOKEN_EXPIRE: Joi.string().required().default('1d'),
-  REFRESH_TOKEN_COOKIE_NAME: Joi.string().required().default('jid'),
+  ACCESS_TOKEN_COOKIE_NAME: Joi.string().required().default('jid'),
   POSTGRES_DATABASE: Joi.string().required(),
   // POSTGRES_ROOT_PASSWORD: Joi.string().required(),
   DATABASE_URL: Joi.string().required()
@@ -50,7 +50,7 @@ const config = {
     refresh_token: {
       secret: validatedEnv.REFRESH_TOKEN_SECRET,
       expire: validatedEnv.REFRESH_TOKEN_EXPIRE,
-      cookie_name: validatedEnv.REFRESH_TOKEN_COOKIE_NAME
+      cookie_name: validatedEnv.ACCESS_TOKEN_COOKIE_NAME
     }
   }
 } as const;

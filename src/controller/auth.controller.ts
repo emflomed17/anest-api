@@ -165,7 +165,7 @@ export const handleLogin = async (
       );
 
       // send access token per json to user so it can be stored in the localStorage
-      return res.json({ accessToken });
+      return res.json({ accessToken, user: email });
     } else {
       return res
         .status(httpStatus.UNAUTHORIZED)
